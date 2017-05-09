@@ -24,4 +24,14 @@ else
 		doIt;
 	fi;
 fi;
+
+# Install dein
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh $HOME/.vim/bundles/repos/github.com/Shougo/dein.vim
+rm ./installer.sh
+
+#Open vim and install dein
+#:call dein#install()
+
 unset doIt;
+
