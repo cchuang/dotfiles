@@ -117,4 +117,4 @@ alias rtags="Rscript -e \"rtags(ofile='tags')\""
 
 export LC_ALL='en_US.UTF-8'
 export PATH="$HOME/.embulk/bin:$PATH"
-
+export EDITOR='/usr/bin/vim'
