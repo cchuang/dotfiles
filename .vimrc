@@ -76,7 +76,7 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
+	set autoindent		" always set autoindenting on
 
 endif " has("autocmd")
 
@@ -87,6 +87,7 @@ command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 
 set tabstop=4
 set shiftwidth=4
+set autowrite
 " filetype indent on
 
 set fileencodings=utf-8,taiwan,chinese,usc-bom,iso8859-1
@@ -175,3 +176,12 @@ function! s:unite_settings()
 endfunction
 
 colorscheme desert
+
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let cmd = 'rtags'
+  let resp = system(cmd)
+endfunction
+autocmd BufWritePost *.R,*.r call UpdateTags()
+
