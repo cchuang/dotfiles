@@ -87,6 +87,7 @@ command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 
 set tabstop=4
 set shiftwidth=4
+set expandtab
 set autowrite
 " filetype indent on
 
