@@ -9,6 +9,7 @@ function doIt() {
 		--exclude ".DS_Store" \
 		--exclude ".osx" \
 		--exclude "bootstrap.sh" \
+		--exclude "brew.sh" \
 		--exclude "README.md" \
 		--exclude "LICENSE-MIT.txt" \
 		-avh --no-perms . ~;
@@ -27,7 +28,7 @@ fi;
 
 # Install dein
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh $HOME/.vim/bundles/repos/github.com/Shougo/dein.vim
+sh ./installer.sh $HOME/.vim/bundles
 rm ./installer.sh
 
 #Open vim and install dein
