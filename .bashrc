@@ -118,3 +118,16 @@ alias rtags="Rscript -e \"rtags(ofile='tags')\""
 export LC_ALL='en_US.UTF-8'
 export PATH="$HOME/.embulk/bin:$PATH"
 export EDITOR='/usr/bin/vim'
+
+# Less Colors for Man Pages
+export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\e[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\e[0m'           # end mode
+export LESS_TERMCAP_se=$'\e[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\e[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\e[0m'           # end underline
+export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
+
+# Init ssh-agent
+eval `/usr/bin/keychain --eval`
+fortune
