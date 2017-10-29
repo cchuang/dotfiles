@@ -31,6 +31,11 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 sh ./installer.sh $HOME/.vim/bundles
 rm ./installer.sh
 
+# Install tmux-cpu
+git clone https://github.com/tmux-plugins/tmux-cpu ~/.tmux/plugins/tmux-cpu
+git clone https://github.com/aurelien-rainone/tmux-gitbar.git ~/.tmux/plugins/tmux-gitbar
+
+
 #Open vim and install dein
 #:call dein#install()
 
