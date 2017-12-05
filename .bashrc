@@ -116,8 +116,9 @@ fi
 alias rtags="Rscript -e \"rtags(ofile='tags')\""
 
 export LC_ALL='en_US.UTF-8'
-export PATH="$HOME/.embulk/bin:$PATH"
 export EDITOR='/usr/bin/vim'
+export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64'
+export PATH="$HOME/.embulk/bin:$JAVA_HOME/bin:$PATH"
 
 # Less Colors for Man Pages
 export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
@@ -131,4 +132,3 @@ export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
 # Init ssh-agent
 eval `/usr/bin/keychain --eval`
 fortune
-
