@@ -113,12 +113,30 @@ if ! shopt -oq posix; then
   fi
 fi
 
+f () {
+    find . -xtype 'f'  ! -iname '*.dot' ! -iname '*.svg' ! -path '*_delete*' -print0 | xargs -0 grep --color=auto -n $1
+}
+
+
 alias rtags="Rscript -e \"rtags(ofile='tags')\""
 
+alias hive_man="einfo -pp ~/epub/hive_manual.epub | w3m -T text/html"
+alias mc=". /usr/share/mc/bin/mc-wrapper.sh"
+alias vim="$HOME/bin/nvim.appimage"
+alias explorer="/mnt/c/Windows/explorer.exe"
+alias athena="/mnt/c/Windows/System32/cmd.exe /c \"C:\\SQLWorkbench\\sqlwbconsole.cmd\" -profile=Athena-Prod"
+#alias refresh_aws="pushd /tmp;/mnt/c/Users/hua67357/bin/Refresh_AWS_Tokens_v2.1/Refresh_AWS_Tokens_v2.1.exe;rm execution_log.log;popd"
+alias refresh_aws="/mnt/c/Users/hua67357/bin/AWS_Token_Refresh.exe"
+
 export LC_ALL='en_US.UTF-8'
-export EDITOR='/usr/bin/vim'
-export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64'
-export PATH="$HOME/.embulk/bin:$JAVA_HOME/bin:$PATH"
+export EDITOR="$HOME/bin/nvim.appimage"
+export VISUAL="$HOME/bin/nvim.appimage"
+#export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64'
+#export JAVA_HOME='/usr/lib/jvm/java-11-openjdk-amd64'
+#export PATH="$HOME/bin:$JAVA_HOME/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+#export DOCKER_HOST=tcp://localhost:2375/
+export BROWSER="/usr/bin/wslview"
 
 # Less Colors for Man Pages
 export LESS_TERMCAP_mb=$'\e[01;31m'       # begin blinking
@@ -128,7 +146,50 @@ export LESS_TERMCAP_se=$'\e[0m'           # end standout-mode
 export LESS_TERMCAP_so=$'\e[38;5;246m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\e[0m'           # end underline
 export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
+export PYTHONPATH=.
 
 # Init ssh-agent
 eval `/usr/bin/keychain --eval`
+export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] $(gitprompt)\$ '
 fortune
+
+complete -C /home/hua67357/bin/s5cmd s5cmd
+
+### quicd bash with nnn
+n ()
+{
+    # Block nesting of nnn in subshells
+    [ "${NNNLVL:-0}" -eq 0 ] || {
+        echo "nnn is already running"
+        return
+    }
+
+    # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # If NNN_TMPFILE is set to a custom path, it must be exported for nnn to
+    # see. To cd on quit only on ^G, remove the "export" and make sure not to
+    # use a custom path, i.e. set NNN_TMPFILE *exactly* as follows:
+    #      NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+
+    # The command builtin allows one to alias nnn to n, if desired, without
+    # making an infinitely recursive alias
+    command nnn "$@"
+
+    [ ! -f "$NNN_TMPFILE" ] || {
+        . "$NNN_TMPFILE"
+        rm -f -- "$NNN_TMPFILE" > /dev/null
+    }
+}
+export NNN_FIFO=/tmp/nnn.fifo
+export NNN_PLUG='p:preview-tui;'
+export NNN_COLORS='1234'
+export NNN_OPTS='cErx'
+export NNN_OPENER='/home/hua67357/.config/nnn/plugins/nuke'
+
